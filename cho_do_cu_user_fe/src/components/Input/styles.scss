@@ -1,0 +1,47 @@
+.custom-input {
+    .ant-input-affix-wrapper {
+        @apply px-[15px];
+    }
+
+    .ant-input, .ant-input-password {
+        @apply bg-white text-black-20 py-[5px] px-5 rounded-[0.425rem] text-sm outline-none font-medium;
+        @apply pl-3 #{!important};
+    }
+
+    .ant-input-password {
+        input {
+            @apply bg-transparent
+        }
+        @apply pl-0 #{!important}
+    }
+
+    .ant-input-disabled {
+        @apply bg-gray-95
+    }
+
+    .ant-input-password {
+        .ant-input {
+            @apply h-auto;
+        }
+
+        .ant-input-suffix {
+            @apply absolute top-[35%] right-4;
+        }
+
+        &:hover, &:focus {
+            @apply z-0;
+        }
+    }
+
+    .ant-input-outlined {
+        &:focus, &:focus-within, &:hover {
+            @apply shadow-none border-[#f80] bg-[#fafafa];
+        }
+    }
+
+    .ant-input-group-addon {
+        @apply bg-white border-l-0
+    }
+
+    @apply relative;
+}

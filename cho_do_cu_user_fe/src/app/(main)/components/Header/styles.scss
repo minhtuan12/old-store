@@ -1,0 +1,50 @@
+.ant-popover-inner {
+    @apply p-0 bg-gray-100 rounded #{!important}
+}
+
+.ant-popover-arrow-content::before {
+    @apply bg-gray-100
+}
+
+.ant-badge-multiple-words {
+    @apply py-0 px-1
+}
+
+.ant-popover-arrow {
+    @apply hidden #{!important}
+}
+
+.drawer-custom {
+    .ant-drawer-wrapper-body {
+        .ant-drawer-body {
+            padding: 0
+        }
+    }
+}
+
+.input-custom {
+    input {
+        @apply p-1.5
+    }
+
+    .rt-TextFieldSlot {
+        @apply w-[45px] cursor-pointer
+    }
+}
+
+.icon-custom {
+    svg {
+        stroke: white;
+        stroke-width: 0.325;
+    }
+}
+
+.dropdown-custom {
+    .ant-dropdown-menu-item {
+        @apply py-2 !important
+    }
+
+    .ant-dropdown-menu-item-icon {
+        @apply mr-3 !important
+    }
+}

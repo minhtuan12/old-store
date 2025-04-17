@@ -1,0 +1,47 @@
+.main-table {
+    .ant-table-body {
+        &::-webkit-scrollbar {
+            @apply w-[5px] transition-all duration-200 #{!important}
+        }
+
+        &::-webkit-scrollbar-track {
+            @apply bg-transparent rounded-md #{!important}
+        }
+
+        &::-webkit-scrollbar-thumb {
+            @apply bg-transparent rounded-lg transition-all duration-200 #{!important}
+        }
+
+        &::-webkit-scrollbar-thumb:vertical {
+            @apply bg-black-75 #{!important}
+        }
+
+        .ant-table-tbody {
+            .ant-table-placeholder {
+                @apply h-[calc(100vh_-_335px)]
+            }
+        }
+
+        @apply min-h-[calc(100vh_-_335px)] max-h-[calc(100vh-_-335px)]
+    }
+}
+
+.no-pagination {
+    .ant-table-body {
+        .ant-table-tbody {
+            .ant-table-placeholder {
+                @apply h-[calc(100vh_-_280px)]
+            }
+        }
+
+        @apply min-h-[calc(100vh_-_280px)] max-h-[calc(100vh_-_280px)]
+    }
+}
+
+.general-pagination {
+    li {
+        .ant-pagination-item-ellipsis {
+            color: white !important;
+        }
+    }
+}

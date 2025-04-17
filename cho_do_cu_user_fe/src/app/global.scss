@@ -1,0 +1,327 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Helvetica';
+    font-style: normal;
+    src: url("../assets/fonts/Helvetica.ttf");
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'Arial';
+    font-style: normal;
+    src: url("../assets/fonts/ARIAL.TTF");
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    src: url("../assets/fonts/Roboto-Black.ttf");
+    font-display: block;
+}
+
+body {
+    font-family: Helvetica, Arial, Roboto, sans-serif !important;
+    @apply m-0
+}
+
+a {
+    @apply text-[#477ad7]
+}
+
+.error {
+    .icon {
+        @apply w-3.5 mt-[3px] mr-[5px]
+    }
+
+    @apply flex items-center text-red-500 text-left text-sm mt-[3px] ml-1;
+}
+
+.required {
+    @apply text-[red] #{!important}
+}
+
+/* Custom tabs */
+.custom-tabs {
+    .ant-tabs {
+        .ant-tabs-nav {
+            .ant-tabs-nav-wrap {
+                .ant-tabs-nav-list {
+                    .ant-tabs-tab {
+                        .ant-tabs-tab-btn {
+                            font-family: Helvetica, Arial, Roboto, sans-serif !important;
+                            @apply text-[#6b7280] font-[500] text-[16px]
+                        }
+
+                        &:hover {
+                            .ant-tabs-tab-btn {
+                                @apply text-[#f80] font-[500]
+                            }
+                        }
+                    }
+
+                    .ant-tabs-tab-active {
+                        .ant-tabs-tab-btn {
+                            font-family: Helvetica, Arial, Roboto, sans-serif !important;
+                            @apply text-[#f80]
+                        }
+                    }
+
+                    .ant-tabs-ink-bar {
+                        @apply bg-[#f80]
+                    }
+                }
+            }
+        }
+    }
+}
+
+.main-select {
+    .ant-select {
+        .ant-select-selector,
+        .ant-select-selection-item {
+            font-family: Helvetica, Arial, Roboto, sans-serif !important;
+            @apply rounded-[0.425rem] font-[500] text-[14px]
+        }
+
+        .ant-select-selector {
+            .ant-select-selection-search, .ant-select-selection-item {
+                @apply pl-1
+            }
+
+            @apply pl-4 #{!important}
+        }
+
+        &:hover, &:focus-within {
+            .ant-select-selector {
+                @apply border-[#f80] #{!important}
+            }
+        }
+
+        @apply h-[45px]
+    }
+}
+
+.custom-admin-table {
+    * {
+        &::-webkit-scrollbar {
+            @apply w-[5px] transition-all duration-200 #{!important}
+        }
+
+        &::-webkit-scrollbar-track {
+            @apply bg-transparent rounded-md
+        }
+
+        &::-webkit-scrollbar-thumb {
+            @apply bg-transparent rounded-lg transition-all duration-200
+        }
+
+        &::-webkit-scrollbar-thumb:vertical {
+            @apply bg-black-75
+        }
+    }
+
+    .ant-table-body {
+        scrollbar-gutter: stable;
+        @apply min-h-[calc(100vh_-_320px)] max-h-[calc(100vh_-_320px)]
+    }
+}
+
+.main-switch {
+    &:not(.ant-switch-checked) {
+        @apply bg-gray-95 #{!important}
+    }
+}
+
+.admin-small-table {
+    .ant-table-body {
+        @apply scrollbar-thin overflow-y-scroll overflow-x-hidden hover:overflow-x-auto min-h-[170px] max-h-[170px] #{!important}
+    }
+}
+
+.disabled-link {
+    @apply pointer-events-none text-[gray] hover:text-[gray]
+}
+
+.attribute-table {
+    .ant-table-body {
+        @apply max-h-[calc(100vh_-_430px)] scrollbar-thin #{!important}
+    }
+
+    .ant-table-tbody {
+        .ant-table-cell {
+            &:nth-child(4) {
+                @apply p-0 #{!important}
+            }
+        }
+    }
+}
+
+.admin-button {
+    @apply bg-[#1677ff] #{!important}
+}
+
+.popover-icon {
+    svg {
+        @apply fill-[#ffffff]
+    }
+
+    @apply absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]
+}
+
+.main-btn {
+    @apply bg-[#f80] hover:bg-white hover:text-[#f80] hover:border-[#f80] #{!important}
+}
+
+.main-delete-btn {
+    @apply bg-[#ff4d4f] hover:bg-white hover:text-[#ff4d4f] hover:border-[#ff4d4f] #{!important}
+}
+
+.main-radio {
+    .ant-radio-wrapper {
+        .ant-radio-inner {
+            @apply border-[#f80] #{!important}
+        }
+    }
+
+    .ant-radio-checked .ant-radio-inner {
+        @apply border-[#f80] bg-[#f80] #{!important}
+    }
+}
+
+.main-input-number {
+    .ant-input-number-outlined {
+        @apply hover:border-[#f80] focus-within:border-[#f80] #{!important}
+    }
+
+    .ant-input-number-group {
+        .ant-input-number-input-wrap {
+            input {
+                @apply h-full #{!important}
+            }
+
+            @apply h-full #{!important}
+        }
+
+        @apply h-full #{!important}
+    }
+}
+
+.main-date-picker {
+    .ant-picker-outlined {
+        @apply hover:border-[#f80] focus-within:border-[#f80] #{!important}
+    }
+}
+
+.custom-table {
+    .ant-table-body,
+    .ant-table-content {
+        @apply scrollbar-thin
+    }
+}
+
+.order-table {
+    .ant-table-content {
+        @apply min-h-[calc(100vh_-_440px)] max-h-[calc(100vh_-_440px)] overflow-auto
+    }
+}
+
+.custom-upload {
+    .ant-upload {
+        button {
+            @apply hover:text-[#f80] hover:border-[#f80] active:text-[#f80] active:border-[#f80] #{!important}
+        }
+
+        @apply w-full
+    }
+}
+
+.custom-carousel {
+    .ant-carousel {
+        .slick-initialized {
+            @apply w-full h-full #{!important}
+        }
+
+        .slick-list {
+            .slick-track {
+                @apply w-full h-full #{!important}
+            }
+
+            @apply w-full h-full #{!important}
+        }
+
+        .slick-slide {
+            div {
+                img {
+                    @apply w-fit h-auto #{!important}
+                }
+
+                @apply w-full h-full #{!important}
+            }
+        }
+
+        @apply w-full h-full #{!important}
+    }
+}
+
+.custom-list {
+    .ant-list-item-meta-content {
+        .ant-list-item-meta-title {
+            @apply overflow-hidden text-ellipsis
+        }
+        @apply pr-2
+    }
+}
+
+.custom-modal {
+    .ant-modal-header {
+        .ant-modal-title {
+            @apply bg-[#c8c8c8] text-[#000]
+        }
+    }
+    .ant-modal-content {
+        @apply bg-[#c8c8c8]
+    }
+}
+
+.custom-carousel {
+    .slick-next, .slick-prev {
+        @apply text-[#000] #{!important}
+    }
+}
+
+.dropdown-icon {
+    svg {
+        @apply fill-[#ffffff]
+    }
+
+    @apply absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]
+}
+
+.custom-popconfirm {
+    .ant-popconfirm-inner-content {
+        @apply p-3 #{!important}
+    }
+}
+
+.custom-swiper {
+    .swiper-button-prev, .swiper-button-next {
+        color: #000;
+        transform: scale(0.5);
+    }
+
+    .swiper-button-prev {
+        @apply left-0 #{!important};
+    }
+
+    .swiper-button-next {
+        @apply right-0 #{!important};
+    }
+}
+
+.ant-spin-dot-item {
+    @apply bg-[#f80] #{!important};
+}

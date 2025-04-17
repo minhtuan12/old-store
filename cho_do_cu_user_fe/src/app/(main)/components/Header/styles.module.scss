@@ -1,0 +1,133 @@
+.headerWrap {
+    .headerLeftWrap {
+        .headerMainWrap {
+        }
+
+        .itemHeaderLeft {
+            .iconWrap {
+                @apply text-[22px] text-[#8c8c8c] transition-all duration-300
+            }
+
+            @apply mr-2.5 p-2.5 cursor-pointer
+        }
+
+        .btnToggleSideBar {
+            @apply text-lg font-bold transition-all duration-500 hidden
+        }
+
+        .btnToggleSideBarClose {
+            @apply text-lg font-bold transition-all duration-500 transform rotate-180
+        }
+
+        .menuIcon {
+            .headerTitle {
+                font-size: 24px;
+                font-optical-sizing: auto;
+                font-weight: 500;
+                font-style: normal;
+            }
+
+            @apply ml-2.5 cursor-pointer text-white text-lg flex items-center
+        }
+
+        @apply flex items-center
+    }
+
+    .headerMiddleWrap {
+        .search {
+            .searchInput {
+                @apply h-full
+            }
+
+            @apply w-full mr-10
+        }
+
+        .cartIcon {
+            svg {
+                fill: white;
+            }
+
+            @apply cursor-pointer
+        }
+
+        @apply w-1/3 flex items-center
+    }
+
+    .headerRightWrap {
+        .itemHeaderRight {
+            &:hover {
+                .iconWrap {
+                    @apply text-blue-65
+                }
+            }
+
+            .text {
+                &:hover {
+                    @apply text-[#BDE56C]
+                }
+
+                @apply text-[13px] text-[#fff] cursor-pointer font-semibold
+            }
+
+            .iconWrap {
+                @apply flex items-center text-base transition-all duration-300 text-black-20
+            }
+
+            .infoWrap {
+                .avatarWrap {
+                    img {
+                        @apply w-full h-full object-cover
+                    }
+
+                    @apply w-[35px] h-[35px] rounded-lg overflow-hidden mr-1.5 flex items-center justify-center bg-gray-90
+                }
+
+                .info {
+                    span {
+                        @apply leading-none block
+                    }
+
+                    .name {
+                        @apply font-bold flex items-center
+                    }
+
+                    @apply not-italic font-normal text-sm text-black-20 mr-1
+                }
+
+                .btnWrap {
+                    @apply flex items-center mr-0.5
+                }
+
+                @apply flex justify-start items-center
+            }
+
+            @apply p-2.5 my-0 mx-[5px] flex items-center
+        }
+
+        .itemChangeTheme {
+            @apply py-2.5 px-2
+        }
+
+        @apply flex items-center
+    }
+
+    @apply w-full h-[80px] bg-[#f80] flex items-center justify-between py-2.5 px-[25px] shadow-[0_10px_30px_0_rgba(82,63,105,0.05)] fixed z-10
+}
+
+.dropdownIcon {
+    svg {
+        @apply fill-[#ffffff]
+    }
+
+    @apply absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]
+}
+
+@media only screen and (max-width: 375px) {
+    .headerWrap {
+        .headerLeftWrap {
+            .btnToggleSideBar {
+                @apply block
+            }
+        }
+    }
+}

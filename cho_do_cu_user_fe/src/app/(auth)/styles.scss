@@ -1,0 +1,23 @@
+.auth-button {
+    .ant-btn, .ant-btn-primary {
+        &:hover {
+            @apply bg-[#f6b060] #{!important}
+        }
+
+        @apply w-full h-full rounded-md text-[18px] font-medium bg-[#f80] #{!important}
+    }
+}
+
+.custom-checkbox {
+    .ant-checkbox-checked {
+        .ant-checkbox-inner {
+            @apply bg-[#f80] border-[#f80] #{!important}
+        }
+    }
+}
+
+.redirect-btn {
+    .ant-btn, .ant-btn-primary {
+        @apply text-[16px] #{!important}
+    }
+}

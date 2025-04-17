@@ -1,0 +1,6 @@
+.layoutWrap {
+    .authWrap {
+        @apply bg-[url('../../../public/auth-background.jpg')] bg-contain bg-center h-[100svh];
+        @apply flex justify-center items-center m-0 #{!important};
+    }
+}

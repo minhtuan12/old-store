@@ -1,0 +1,35 @@
+.loginWrap {
+    @apply bg-[#fff] rounded-xl shadow-[rgba(99,99,99,0.2)_0px_2px_8px_0px] pt-4 px-10 pb-10 w-[450px];
+
+    .imageWrap {
+        @apply h-[100px] flex items-center justify-center;
+    }
+
+    .title {
+        @apply font-semibold text-[22px];
+    }
+
+    .loginFormContent {
+        @apply mt-5;
+
+        .nameInput {
+            @apply w-full flex items-center justify-between;
+
+            .halfInput {
+                @apply w-[45%];
+            }
+        }
+
+        .inputWrap {
+            @apply mt-5;
+        }
+    }
+
+    .btnWrap {
+        button {
+            @apply bg-[#1677ff] hover:bg-[#4096ff] text-white
+        }
+
+        @apply mt-5 h-[45px]
+    }
+}

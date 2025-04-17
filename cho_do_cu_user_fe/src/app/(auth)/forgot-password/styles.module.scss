@@ -1,0 +1,73 @@
+.forgotWrap {
+    @apply bg-[#fff] rounded-md shadow-[rgba(99,99,99,0.2)_0px_2px_8px_0px] pt-4 px-10 pb-10 w-[400px];
+
+    .imageWrap {
+        @apply h-[100px] flex items-center justify-center;
+    }
+
+    .title {
+        @apply font-semibold text-[22px];
+    }
+
+    .forgotFormContent {
+        @apply mt-5;
+
+        .nameInput {
+            @apply w-full flex items-center justify-between;
+
+            .halfInput {
+                @apply w-[45%];
+            }
+        }
+
+        .inputWrap {
+            @apply mt-5;
+        }
+    }
+
+    .forgotPasswordWrap {
+        .forgot {
+            @apply cursor-pointer hover:text-[#5a8ae3];
+        }
+        @apply text-[15px] text-[#3772df] flex justify-end items-center mt-5;
+    }
+
+    .btnWrap {
+        @apply mt-5 h-[45px]
+    }
+
+    .noAccountWrap {
+        .registerBtn {
+            @apply text-[15px] underline ml-2 cursor-pointer
+        }
+
+        @apply flex items-center justify-center mt-5 text-[15px]
+    }
+
+    .googleLoginWrap {
+        border-top: 1px solid #7a7a7a;
+        @apply text-center text-sm mt-6;
+
+        .option {
+            @apply mt-2;
+        }
+
+        .btnLoginWithGoogle {
+            .btnGoogleWrap {
+                .googleImageWrap {
+                    .googleImage {
+                        @apply w-4 h-4;
+                    }
+
+                    @apply bg-[#fff] rounded-[50%] p-[10px] flex items-center justify-center mr-1 ml-[1px]
+                }
+
+                @apply flex items-center rounded-full bg-[#000] text-white font-medium text-[14px];
+                @apply transition-colors duration-300 focus:outline-none shadow-none h-[40px] cursor-pointer;
+                @apply hover:bg-[#7a7a7a] hover:outline-none pl-0 pr-3
+            }
+
+            @apply flex justify-center items-center mt-2
+        }
+    }
+}

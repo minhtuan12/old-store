@@ -1,0 +1,13 @@
+.headerWrap {
+    button {
+        @apply cursor-pointer
+    }
+}
+
+.detailText {
+    a {
+        @apply text-[#f80]
+    }
+
+    @apply text-gray-500 font-medium text-[15px]
+}

@@ -1,0 +1,51 @@
+.loginWrap {
+    @apply bg-[#fff] rounded-md shadow-[rgba(99,99,99,0.2)_0px_2px_8px_0px] pt-4 px-10 pb-10 w-[450px];
+
+    .imageWrap {
+        @apply h-[100px] flex items-center justify-center;
+    }
+
+    .title {
+        @apply font-semibold text-[22px];
+    }
+
+    .loginFormContent {
+        @apply mt-5;
+
+        .nameInput {
+            @apply w-full flex items-center justify-between;
+
+            .halfInput {
+                @apply w-[45%];
+            }
+        }
+
+        .inputWrap {
+            @apply mt-5;
+        }
+    }
+
+    .forgotPasswordWrap {
+        .forgot {
+            a {
+                @apply no-underline
+            }
+
+            @apply cursor-pointer hover:text-[#5a8ae3];
+        }
+
+        @apply text-[15px] text-[#3772df] flex justify-end items-center mt-5;
+    }
+
+    .btnWrap {
+        @apply mt-5 h-[45px]
+    }
+
+    .noAccountWrap {
+        .registerBtn {
+            @apply text-[15px] underline ml-2 cursor-pointer
+        }
+
+        @apply flex items-center justify-center mt-5 text-[15px]
+    }
+}

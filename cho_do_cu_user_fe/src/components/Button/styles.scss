@@ -1,0 +1,19 @@
+.custom-button {
+    button {
+        &:hover {
+            @apply bg-white text-[#f80] border-[#f80] #{!important}
+        }
+
+        @apply bg-[#f80] font-semibold text-white
+    }
+}
+
+.custom-button-reverse {
+    button {
+        &:hover {
+            @apply bg-[#f80] text-white border-gray-95 #{!important}
+        }
+
+        @apply bg-white font-semibold text-[#f80] border-[#f80]
+    }
+}

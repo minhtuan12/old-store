@@ -1,0 +1,11 @@
+.breadcrumbWrap {
+    .text {
+        @apply text-[15px] text-gray-45 transition-all duration-300
+    }
+
+    .activeText {
+        @apply text-[#f80]
+    }
+
+    @apply mb-4
+}
