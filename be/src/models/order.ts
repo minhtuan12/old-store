@@ -1,5 +1,7 @@
 import { Document, model, Schema } from 'mongoose';
 import { ORDER_STATUS, PAYMENT_METHOD } from '../utils/enum';
+const Stripe = require('stripe');
+const stripe = Stripe(String(process.env.STRIPE_PRIVATE_KEY));
 
 export interface IOrder extends Document {
     customer_id: Schema.Types.ObjectId;
@@ -10,10 +12,10 @@ export interface IOrder extends Document {
     payment_method: string;
     status: string;
     total: number | null;
-    receiver_stripe_account_id: string;
-    stripe_payment_intent_id: string;
+    stripe_payment_intent_id: string; //for capture strpe checkout payment 
     cancelled_user_id : Schema.Types.ObjectId;
     is_deleted: boolean;
+    receiver_stripe_account_id: string
 }
 
 const OrderSchema = new Schema<IOrder>(
@@ -69,6 +71,13 @@ const OrderSchema = new Schema<IOrder>(
             type: String,
             required: true,
             immutable: true,
+            validate: {
+                validator: async function (receiver_stripe_account_id: string): Promise<boolean>  {
+                    const account = await stripe.accounts.retrieve(receiver_stripe_account_id);
+                    if (!account) throw new Error('receiver_stripe_account_id không tồn tại');
+                    return true;
+                }
+            }
         },
         stripe_payment_intent_id: {
             type: String, 

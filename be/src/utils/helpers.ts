@@ -1,9 +1,8 @@
-import { readFileSync } from "fs";
-import Handlebars from "handlebars";
 import Joi from "joi";
-import moment from "moment";
 import {Types} from "mongoose";
-import path from "path";
+import { INotification } from "../models/notification";
+import { userSockets } from "../services/socket";
+import { io } from "../server";
 const {ObjectId} = Types
 
 export const getDetailErrorMessage = (error: Joi.ValidationError): any => {
@@ -88,30 +87,3 @@ export const getOneMonthLater = () => {
     expiredDate.setDate(today.getDate() + 30);
     return expiredDate;
 }
-
-export const formatExpiredDate = (date: Date) => {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-
-    return `00:00 ${day}/${month}/${year}`;
-}
-
-export const compileTemplate = (templatePath: string, data: object): string => {
-    const templateContent = readFileSync(path.resolve(templatePath), 'utf8');
-    const template = Handlebars.compile(templateContent);
-    return template(data);
-};
-
-export const getTimeFormat = (groupingType: string): string => {
-    switch (groupingType) {
-        case "week":
-            return "%Y-%U"; // Year-Week (e.g., 2024-23)
-        case "month":
-            return "%Y-%m"; // Year-Month (e.g., 2024-11)
-        case "year":
-            return "%Y"; // Year (e.g., 2024)
-        default:
-            return "%Y-%m"; // Default to month if invalid
-    }
-};

@@ -80,30 +80,6 @@ class RatingRepo {
             throw err;
         }
     }
-
-    async getRatingUserDashboard(userId : string):Promise<IRating[]> {
-        try {
-            const ratings = await Rating.aggregate([
-                {
-                    $match: {
-                        reviewee_id: userId,
-                        is_deleted: false
-                    }
-                },
-                {
-                    $group: {
-                        _id: null,
-                        averageStars: { $avg: "$stars" },
-                        totalRatings: { $sum: 1 },
-                    },
-                },
-            ]);
-    
-            return ratings
-        } catch (err) {
-            throw err
-        }
-    }
 }
 
 export default new RatingRepo();

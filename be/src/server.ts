@@ -6,24 +6,31 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import passport from "passport";
-import session from 'express-session';
+import _ from "lodash";
 import * as http from "http";
 import { Server } from "socket.io";
 import connectSocket from "./services/socket";
 import './cron/cronJob'
+// import { createClient } from 'redis';
+
+// const client = createClient();
+
+// client.on('error', err => console.log('Redis Client Error', err));
+
+// client.connect();
 
 config();
 
 const hostname = "localhost";
 const port = 8080;
-const fe_access = process.env.FE_ACCESS;
+const fe_access = process.env.fe_access;
 
 const app = express();
 const server = http.createServer(app);
 
 export const io = new Server(server, {
     cors: {
-        origin: fe_access,
+        origin: [`${fe_access}`, `http://localhost:8080`],
         credentials: true,
     },
 });
@@ -32,15 +39,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(passport.initialize());
 connect();
-app.use(session({
-    secret: String(process.env.WEB_NAME), 
-    resave: false, 
-    saveUninitialized: false,  
-    cookie: {
-        httpOnly: true,  
-        maxAge: 3600000  
-    }
-}));
+
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(
     bodyParser.urlencoded({
@@ -51,20 +50,11 @@ app.use(
 );
 app.use(
     cors({
-        origin: [`${fe_access}`, `${process.env.BASE_URL}`],
+        origin: '*',
         methods: "GET,POST,PUT,PATCH,DELETE",
         credentials: true,
     })
 );
-app.use(session({
-    secret: String(process.env.WEB_NAME), 
-    resave: false, 
-    saveUninitialized: false,  
-    cookie: {
-        httpOnly: true,  
-        maxAge: 3600000  
-    }
-}));
 
 route(app);
 connectSocket(io);
@@ -75,6 +65,6 @@ const assignSocketToReq = (req: any, res: Response, next: Function) => {
 };
 app.use(assignSocketToReq as any);
 
-server.listen(port, () => {
+server.listen(port, hostname, () => {
     console.log(`Server running at ${process.env.BASE_URL}`);
 });

@@ -8,7 +8,6 @@ import { IAdmin } from '../models/admin';
 import postRepository from '../repositories/post.repository';
 import productRepository from '../repositories/product.repository';
 import attribute_productRepository from '../repositories/attribute_product.repository';
-import OrderRepo from '../repositories/order.repository';
 
 interface MulterRequest extends Request {
     files: Express.Multer.File[];
@@ -21,8 +20,7 @@ interface CustomRequest extends Request {
 class AdminController {
     async getProfile(req: CustomRequest, res: Response): Promise<void> {
         try {
-            const admin = req.account;
-            const {password, ...account} = admin?.toObject();
+            const account = req.account as IAdmin;
             res.status(200).send(account);
         } catch(err) {
             res.status(400).send(err);
@@ -145,10 +143,7 @@ class AdminController {
     async deleteUser(req: Request, res: Response): Promise<void> {
         try {
             const id = req.params.id;
-            if (await OrderRepo.userIsOrdering(id)) {
-                res.status(400).send('Bạn không thể xóa user này, user đang trong quá trình nhận đơn hàng');
-                return;
-            }
+
             await Promise.all([
                 UserRepo.deleteUser(id),
                 postRepository.deletePostsByUserId(id),

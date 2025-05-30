@@ -30,6 +30,8 @@ class NotificationRepo {
             const onlineSocketIds = Object.keys(userSockets)?.filter(
                 (key) => userSockets[key] === String(receiver_id)
             );
+            console.log('userSockets', userSockets);
+            console.log('onlineSocketIds', onlineSocketIds);
 
             if (onlineSocketIds?.length > 0) {
                 onlineSocketIds?.forEach((socketId: string) => {

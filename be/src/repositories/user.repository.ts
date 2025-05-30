@@ -46,6 +46,7 @@ class UserRepo {
                     $project: {
                         password: 0,
                         is_deleted: 0,
+                        is_google_account: 0,
                     },
                 },
             ]);
@@ -215,52 +216,25 @@ class UserRepo {
                         }
                     ),
                 ]);
-            } else {
-                await Promise.all([
-                    User.findByIdAndUpdate(
-                        { _id: new ObjectId(followedUserId) },
-                        {
-                            $pull: {
-                                follower_ids: followerId,
-                            },
-                        }
-                    ),
-                    User.findByIdAndUpdate(
-                        { _id: new ObjectId(followerId) },
-                        {
-                            $pull: {
-                                following_user_ids: followedUserId,
-                            },
-                        }
-                    ),
-                ]);
             }
-        } catch (err) {
-            throw err;
-        }
-    }
-    //for dashboard
-    async getUserRegistrationStats(timeFormat: string): Promise<any> {
-        try {
-            return await User.aggregate([
-                {
-                    $group: {
-                        _id: { $dateToString: { format: timeFormat, date: "$updatedAt" } },
-                        count: { $sum: 1 },
-                    },
-                },
-                { $sort: { _id: 1 } },
-            ]); 
-        } catch (err) {
-            throw err;
-        }
-    }
-
-    async getNumberOfUserCurrently(): Promise<any> {
-        try {
-            return await User.countDocuments(
-                {is_deleted: false}
-            )
+            await Promise.all([
+                User.findByIdAndUpdate(
+                    { _id: new ObjectId(followedUserId) },
+                    {
+                        $pull: {
+                            follower_ids: followerId,
+                        },
+                    }
+                ),
+                User.findByIdAndUpdate(
+                    { _id: new ObjectId(followerId) },
+                    {
+                        $pull: {
+                            following_user_ids: followedUserId,
+                        },
+                    }
+                ),
+            ]);
         } catch (err) {
             throw err;
         }

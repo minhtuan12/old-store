@@ -5,10 +5,10 @@ import isNotDeleted from "../middlewares/isNotDeleted";
 const orderRouter = express.Router();
 
 orderRouter.post('/create', [authentication, isNotDeleted], OrderController.createOrder);
-orderRouter.get('/:id',[authentication, isNotDeleted], OrderController.getOrder);
+orderRouter.get('/',[authentication, isNotDeleted], OrderController.getOrder);
 orderRouter.get('/get-my-selling-orders',[authentication, isNotDeleted], OrderController.getMySellingOrders);
 orderRouter.get('/get-my-buying-orders',[authentication, isNotDeleted], OrderController.getMyBuyingOrders);
 orderRouter.patch('/update-order-status', [authentication, isNotDeleted], OrderController.updateOrderStatus);
-orderRouter.patch('/cancel', [authentication, isNotDeleted], OrderController.cancelOrder);
+orderRouter.patch('/received-order', [authentication, isNotDeleted], OrderController.receivedOrder);
 
 export default orderRouter;

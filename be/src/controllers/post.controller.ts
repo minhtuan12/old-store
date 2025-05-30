@@ -9,15 +9,13 @@ import CloudinaryService from "../services/cloudinary";
 import { IAttribute } from "../models/attribute";
 import { IAttributeProduct } from "../models/attribute_product";
 import mongoose, { isValidObjectId, Types } from "mongoose";
-import { formatExpiredDate, getDetailErrorMessage, getOneMonthLater } from "../utils/helpers";
+import { getDetailErrorMessage, getOneMonthLater } from "../utils/helpers";
 import { updatePostSchema } from "../requests/post.request";
 import { NOTIFICATION_TYPE, POST_STATUS } from "../utils/enum";
 import { DEFAULT_GET_QUERY } from "../utils/constants";
 import User from "../models/user";
 import notificationRepository from "../repositories/notification.repository";
 import NotificationRepo from '../repositories/notification.repository';
-import { IPost } from "../models/post";
-import orderRepo from "../repositories/order.repository";
 
 const { ObjectId } = Types;
 
@@ -364,6 +362,7 @@ class PostController {
                         req.query.sort_order || DEFAULT_GET_QUERY.SORT_ORDER,
                 }
             );
+
             res.status(200).send(result);
         } catch (err: any) {
             res.status(400).send(err.message);
@@ -536,16 +535,15 @@ class PostController {
                 return;
             }
             try {
-                const oneMonthLater = getOneMonthLater()
                 const updatedPost = !post?.expired_at ? {
-                    expired_at: oneMonthLater,
+                    expired_at: getOneMonthLater(),
                     status: POST_STATUS.APPROVED,
                 } : {
                     status: POST_STATUS.APPROVED
                 }
                 await PostRepo.updatePost(post._id, updatedPost);
                 await notificationRepository.sendNotification({
-                    title: `Bài đăng của bạn đã được duyệt và sẽ hết hạn vào ${formatExpiredDate(oneMonthLater)}. Nhấn để xem chi tiết bài đăng`,
+                    title: "Bài đăng của bạn đã được duyệt. Nhấn để xem chi tiết bài đăng",
                     type: NOTIFICATION_TYPE.APPROVED_POST,
                     receiver_id: post?.poster_id,
                     post_id: post?._id,

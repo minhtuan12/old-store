@@ -19,8 +19,6 @@ export default async function connectSocket(io: any) {
 
             const onlineUserIds = Array.from(io.sockets.sockets.keys());
 
-            io.sockets.emit('online', Object.values(userSockets));
-
             onlineUserIds.forEach(async (socketId: any) => {
                 try {
                     const conversations = await Conversation.find({
@@ -193,7 +191,6 @@ export default async function connectSocket(io: any) {
             socket.on("disconnect", (reason: any) => {
                 // Remove the socketId from userSockets when they disconnect
                 delete userSockets[socket.id];
-                io.sockets.emit('online', Object.values(userSockets));
                 console.log(`Socket ${socket.id} disconnected ${reason}`);
             });
         });

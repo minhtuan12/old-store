@@ -30,7 +30,7 @@ class OrderRepo {
         }
     }
 
-    async getMyBuyingOrders(
+    async getMyByingOrders(
         userId: string,
         status: string,
         searchKey: string = "",
@@ -195,13 +195,11 @@ class OrderRepo {
             throw err;
         }
     }
-
-    async updateStatusOrder(cancelledUserId: string | null, orderId: string, status: string): Promise<boolean> {
+    async updateStatusOrder(orderId: string, status: string): Promise<boolean> {
         try {
-            const updateQuery = cancelledUserId ? { status, cancelled_user_id: cancelledUserId } : { status };
             const result = await Order.findByIdAndUpdate(
                 orderId,
-                updateQuery,
+                { status },
                 { runValidators: true }
             );
 
@@ -210,75 +208,36 @@ class OrderRepo {
             throw err;
         }
     }
-
-    async userIsOrdering(userId: string): Promise<boolean> {
+    async updateStripePaymentIntentId(
+        orderId: string,
+        paymentIntentId: string
+    ): Promise<void> {
         try {
-            const isOrdering = await Order.findOne(
-                {
-                    customer_id: userId,
-                    status: {
-                        $nin:
-                            [
-                                ORDER_STATUS.CANCELLED,
-                                ORDER_STATUS.WAITING_FOR_PAYMENT,
-                                ORDER_STATUS.RECEIVED
-                            ]
-                    }
-                }
-            )
-            return !!isOrdering;
+            await Order.findByIdAndUpdate(orderId, {
+                stripe_payment_intent_id: paymentIntentId
+            });
         } catch (err) {
             throw err;
         }
     }
-
-    async getOrderByStatusAdminDashboard(): Promise<any> {
+    async deleteOrder(orderId: string): Promise<boolean> {
         try {
-            return await Order.aggregate([
-                {
-                    $match: {
-                        is_deleted: false,
-                    }
-                },
-                {
-                    $group: {
-                        _id: "$status",
-                        count: { $sum: 1 }
-                    }
-                }
-            ])
+            const result = await Order.findByIdAndUpdate(orderId, {
+                is_deleted: true,
+            });
+
+            return !!result;
         } catch (err) {
             throw err;
         }
     }
-
-    async getOrderByTimeAdminDashboard(timeFormat: String): Promise<any> {
+    async postIsOrdering(postId: string): Promise<boolean> {
         try {
-            return await Order.aggregate([
-                {
-                    $match: {
-                        is_deleted: false,
-                    }
-                },
-                {
-                    $group: {
-                        _id: { $dateToString: { format: timeFormat, date: "$updatedAt" } },
-                    }
-                }
-            ])
-        } catch (err) {
-            throw err;
-        }
-    }
-
-    async getNumberOfOrderCurrently(): Promise<any> {
-        try {
-            return await Order.countDocuments(
-                {
-                    is_deleted: false,
-                    status: {$ne: ORDER_STATUS.CANCELLED}
-                }
-            )
+            const orderExists = await Order.exists({
+                post_id: postId,
+                status: { $ne: ORDER_STATUS.CANCELLED },
+            });
+            return !!orderExists;
         } catch (err) {
             throw err;
         }
